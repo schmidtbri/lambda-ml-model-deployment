@@ -1,0 +1,15 @@
+service: model-lambda
+
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: python2.7 # or python3.7, supported as of November 2018
+
+functions:
+  currentTime:
+    handler: lambda_function.lambda_handler
+    events:
+      - http:
+          path: ping
+          method: get
