@@ -1,4 +1,4 @@
-""""""
+"""Lambda function entry point."""
 from model_lambda.model_manager import ModelManager
 from model_lambda.config import Config
 
@@ -11,5 +11,6 @@ model_manager.load_models(configuration=Config.models)
 
 
 def lambda_handler(event, context):
+    """Lambda handler function."""
 
     return

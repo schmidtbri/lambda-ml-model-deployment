@@ -1,15 +1,17 @@
-""""""
+"""Model Manager class for loading, managing, and interacting with models."""
 import importlib
 
 from ml_model_abc import MLModel
 
 
 class ModelManager(object):
-    """ Singleton class that instantiates and manages model objects """
+    """Singleton class that instantiates and manages model objects."""
+
     _models = []
 
     @classmethod
     def load_models(cls, configuration):
+        """Load models from configuration."""
         for c in configuration:
             model_module = importlib.import_module(c["module_name"])
             model_class = getattr(model_module, c["class_name"])

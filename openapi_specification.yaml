@@ -1,0 +1,191 @@
+components:
+  schemas:
+    Error:
+      properties:
+        message:
+          description: The error message.
+          type: string
+        type:
+          description: The type of error.
+          type: string
+      required:
+      - message
+      - type
+      type: object
+    JSONSchema:
+      properties:
+        additionalProperties:
+          type: boolean
+        id:
+          type: string
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/JsonSchemaProperty'
+          type: object
+        required:
+          items:
+            type: string
+          type: array
+        schema:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+      required:
+      - additionalProperties
+      - id
+      - required
+      - schema
+      - type
+      type: object
+    JsonSchemaProperty:
+      properties:
+        description:
+          type: string
+        type:
+          type: string
+      required:
+      - type
+      type: object
+    Model:
+      properties:
+        description:
+          description: The description of the model.
+          type: string
+        display_name:
+          description: The display name of the model.
+          type: string
+        major_version:
+          description: The major version of the model package.
+          format: int32
+          type: integer
+        minor_version:
+          description: The minor version of the model package.
+          format: int32
+          type: integer
+        qualified_name:
+          description: The qualified name of the model.
+          type: string
+      required:
+      - description
+      - display_name
+      - major_version
+      - minor_version
+      - qualified_name
+      type: object
+    ModelCollection:
+      properties:
+        models:
+          description: A collection of moodels.
+          items:
+            $ref: '#/components/schemas/Model'
+          type: array
+      required:
+      - models
+      type: object
+    ModelMetadata:
+      properties:
+        description:
+          description: The description of the model.
+          type: string
+        display_name:
+          description: The display name of the model.
+          type: string
+        input_schema:
+          allOf:
+          - $ref: '#/components/schemas/JSONSchema'
+          description: The JSON schema of the input of the model.
+        major_version:
+          description: The major version of the model package.
+          format: int32
+          type: integer
+        minor_version:
+          description: The minor version of the model package.
+          format: int32
+          type: integer
+        output_schema:
+          allOf:
+          - $ref: '#/components/schemas/JSONSchema'
+          description: The JSON schema of the output of the model.
+        qualified_name:
+          description: The qualified name of the model.
+          type: string
+      required:
+      - description
+      - display_name
+      - input_schema
+      - major_version
+      - minor_version
+      - output_schema
+      - qualified_name
+      type: object
+info:
+  description: Simple lambda that makes predictions with an MLModel class.
+  title: Model Lambda Web API
+  version: 1.0.0
+openapi: 3.0.2
+paths:
+  /models:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCollection'
+          description: List of model available
+  /models/<qualified_name>/metadata:
+    get:
+      parameters:
+      - description: The qualified name of the model for which metadata is being requested.
+        in: path
+        name: qualified_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelMetadata'
+          description: Metadata about one model
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Model not found.
+  /models/<qualified_name>/predict:
+    post:
+      parameters:
+      - description: The qualified name of the model being used for prediction.
+        in: path
+        name: qualified_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Prediction is succesful. The schema of the body of the response
+            is described by the model's output schema.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Input is not valid JSON or does not meet the model's input
+            schema.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Model not found.
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Server error.

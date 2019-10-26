@@ -63,3 +63,6 @@ check-codestyle:  ## checks the style of the code against PEP8
 
 check-docstyle:  ## checks the style of the docstrings against PEP257
 	pydocstyle model_lambda
+
+openapi-spec:  ## creates an open api specification document
+	python scripts/openapi.py
