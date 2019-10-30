@@ -16,7 +16,6 @@ model_metadata_schema = ModelMetadataSchema()
 error_schema = ErrorSchema()
 
 
-# @app.route("/models", methods=['GET'])
 def get_models():
     """List of models available.
 
@@ -39,7 +38,6 @@ def get_models():
     return Response(data=response_data, status=200, mimetype="application/json")
 
 
-# @app.route("/models/<qualified_name>/metadata", methods=['GET'])
 def get_metadata(qualified_name):
     """Metadata about one model.
 
@@ -77,7 +75,6 @@ def get_metadata(qualified_name):
         return Response(data=response_data, status=400, mimetype='application/json')
 
 
-# @app.route("/models/<qualified_name>/predict", methods=['POST'])
 def predict(qualified_name, request_body):
     """Endpoint that uses a model to make a prediction.
 

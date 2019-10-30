@@ -23,6 +23,6 @@ setup(
     packages=["model_lambda"],
     python_requires=">=3.5",
     install_requires=["marshmallow=3.2.1",
-                      "apispec-3.0.0",
+                      "apispec[yaml]=3.0.0",
                       "iris-model@git+https://github.com/schmidtbri/ml-model-abc-improvements#egg=iris_model@master"]
     )

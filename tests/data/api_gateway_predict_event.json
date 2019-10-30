@@ -1,6 +1,6 @@
 {
-  "resource": "/",
-  "path": "/",
+  "resource": "/api/models/{qualified_name}/predict",
+  "path": "/api/models/iris_model/predict",
   "httpMethod": "POST",
   "headers": {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
@@ -27,7 +27,9 @@
     "X-Forwarded-Proto": "https"
   },
   "queryStringParameters": null,
-  "pathParameters": null,
+  "pathParameters": {
+      "qualified_name": "iris_model"
+  },
   "stageVariables": null,
   "requestContext": {
     "path": "/dev/",
@@ -49,10 +51,10 @@
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
       "user": null
     },
-    "resourcePath": "/",
+    "resourcePath": "/api/models/{qualified_name}/predict",
     "httpMethod": "POST",
     "apiId": "j3azlsj0c4"
   },
-  "body": "postcode=LS17FR",
+  "body": "{\"petal_length\": 1.0, \"petal_width\": 1.0, \"sepal_length\": 1.0, \"sepal_width\": 1.0}",
   "isBase64Encoded": false
 }

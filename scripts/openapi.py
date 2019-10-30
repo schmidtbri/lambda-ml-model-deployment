@@ -33,6 +33,7 @@ spec = APISpec(
     plugins=[MarshmallowPlugin(), DocPlugin()],
 )
 
+# adding schemas to OpenAPI spec from marshmallow schema classes
 spec.components.schema("Model", schema=ModelSchema)
 spec.components.schema("ModelCollection", schema=ModelCollectionSchema)
 spec.components.schema("JsonSchemaProperty", schema=JsonSchemaProperty)
@@ -40,11 +41,11 @@ spec.components.schema("JSONSchema", schema=JSONSchema)
 spec.components.schema("ModelMetadata", schema=ModelMetadataSchema)
 spec.components.schema("Error", schema=ErrorSchema)
 
+# adding paths to OpenAPI spec from controller docstrings
+spec.path(path="/api/models", func=get_models)
+spec.path(path="/api/models/{qualified_name}/metadata", func=get_metadata)
+spec.path(path="/api/models/{qualified_name}/predict", func=predict)
 
-spec.path(path="/models", func=get_models)
-spec.path(path="/models/<qualified_name>/metadata", func=get_metadata)
-spec.path(path="/models/<qualified_name>/predict", func=predict)
 
-
-with open('../openapi_specification.yaml', 'w') as f:
+with open('openapi_specification.yaml', 'w') as f:
     f.write(spec.to_yaml())
