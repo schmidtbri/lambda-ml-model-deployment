@@ -13,7 +13,6 @@ model_manager.load_models(configuration=Config.models)
 
 def lambda_handler(event, context):
     """Lambda handler function."""
-
     # detecting if the event came from an API Gateway
     if event.get("resource") is not None \
             and event.get("path") is not None \
@@ -28,9 +27,9 @@ def lambda_handler(event, context):
             response = get_metadata(qualified_name=event["pathParameters"]["qualified_name"])
 
         elif event["resource"] == "/api/models/{qualified_name}/predict" \
-            and event["httpMethod"] == "POST" \
-            and event.get("pathParameters") is not None \
-            and event["pathParameters"].get("qualified_name") is not None:
+                and event["httpMethod"] == "POST" \
+                and event.get("pathParameters") is not None \
+                and event["pathParameters"].get("qualified_name") is not None:
             # calling the predict controller function
             response = predict(qualified_name=event["pathParameters"]["qualified_name"], request_body=event["body"])
 
