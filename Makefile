@@ -31,11 +31,11 @@ deployment-package:  ## makes a deployment package with all dependencies
 
 venv: ## create virtual environment
 	python3 -m venv venv
-	venv/bin/pip install --upgrade pip
-	venv/bin/pip install --upgrade setuptools
-	venv/bin/pip install --upgrade wheel
 
 dependencies: ## install dependencies from requirements.txt
+	python -m pip install --upgrade pip
+	python -m pip install --upgrade setuptools
+	python -m pip install --upgrade wheel
 	pip install -r requirements.txt
 
 test-dependencies: ## install dependencies from test_requirements.txt

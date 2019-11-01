@@ -13,6 +13,7 @@ model_manager.load_models(configuration=Config.models)
 
 def lambda_handler(event, context):
     """Lambda handler function."""
+
     # detecting if the event came from an API Gateway
     if event.get("resource") is not None \
             and event.get("path") is not None \
