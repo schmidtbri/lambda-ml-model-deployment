@@ -18,7 +18,7 @@ build: ## build a package
 clean-build:  ## clean build artifacts
 	rm -rf build
 	rm -rf dist
-	rm -rf model_task_queue.egg-info
+	rm -rf model_lambda.egg-info
 
 deployment-package:  ## makes a deployment package with all dependencies
 	# installing all dependencies to the vendors directory
@@ -63,6 +63,12 @@ check-codestyle:  ## checks the style of the code against PEP8
 
 check-docstyle:  ## checks the style of the docstrings against PEP257
 	pydocstyle model_lambda
+
+check-security:  ## checks for common security vulnerabilities
+	bandit -r model_lambda
+
+check-dependencies:  ## checks for security vulnerabilities in dependencies
+	safety check -r requirements.txt
 
 openapi-spec:  ## creates an open api specification document
 	python scripts/openapi.py

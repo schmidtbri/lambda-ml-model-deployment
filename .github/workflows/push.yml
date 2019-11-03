@@ -3,7 +3,8 @@ name: Push Workflow
 on: [push]
 
 jobs:
-  build:
+
+  setup-environment:
 
     runs-on: ubuntu-latest
 
@@ -25,11 +26,16 @@ jobs:
     - name: Install Test Dependencies
       run : make test-dependencies
 
+  check-code:
+
+    needs: setup-environment
+
+    steps:
     - name: Check Codestyle
       run: make check-codestyle
 
     - name: Check Docstyle
       run: make check-docstyle
 
-    - name: Run Unit Tests
-      run: make test
+    - name: Check Security Issues
+      run: make check-security

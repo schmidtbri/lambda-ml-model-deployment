@@ -22,7 +22,8 @@ setup(
     author_email="6666331+schmidtbri@users.noreply.github.com",
     packages=["model_lambda"],
     python_requires=">=3.5",
-    install_requires=["marshmallow=3.2.1",
-                      "apispec[yaml]=3.0.0",
-                      "iris-model@git+https://github.com/schmidtbri/ml-model-abc-improvements#egg=iris_model@master"]
+    install_requires=["marshmallow>3",
+                      "apispec[yaml]>3",
+                      "iris-model@git+https://github.com/schmidtbri/ml-model-abc-improvements#egg=iris_model@master"],
+    tests_require=['pytest', 'pylama', 'coverage', 'bandit', 'safety']
     )

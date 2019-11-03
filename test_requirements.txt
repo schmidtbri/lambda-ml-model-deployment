@@ -20,3 +20,21 @@ pylama==7.7.1
 snowballstemmer==1.9.1
 # this package is used to calculate unit test coverage
 coverage==4.5.4
+# these packages are used to analyze the code for security vulnerabilities
+bandit==1.6.2
+gitdb2==2.0.6
+GitPython==3.0.4
+pbr==5.4.3
+PyYAML==5.1.2
+smmap2==2.0.5
+stevedore==1.31.0
+# these packages are used to check depdencies for security issues
+certifi==2019.9.11
+chardet==3.0.4
+Click==7.0
+dparse==0.4.1
+idna==2.8
+requests==2.22.0
+safety==1.8.5
+urllib3==1.25.6
+
