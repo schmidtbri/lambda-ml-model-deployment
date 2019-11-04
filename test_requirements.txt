@@ -11,6 +11,11 @@ pytest==5.1.2
 six==1.12.0
 wcwidth==0.1.7
 zipp==0.6.0
+# these packages are used to generate an html report for the unit tests
+pytest-html==2.0.0
+pytest-metadata==1.8.0
+# this package is used to calculate unit test coverage
+coverage==4.5.4
 # these packages are used to do code analysis
 mccabe==0.6.1
 pycodestyle==2.5.0
@@ -18,8 +23,6 @@ pydocstyle==4.0.1
 pyflakes==2.1.1
 pylama==7.7.1
 snowballstemmer==1.9.1
-# this package is used to calculate unit test coverage
-coverage==4.5.4
 # these packages are used to analyze the code for security vulnerabilities
 bandit==1.6.2
 gitdb2==2.0.6

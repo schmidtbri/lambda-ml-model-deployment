@@ -39,12 +39,9 @@ jobs:
       run: make check-dependencies
 
     - name: Run Unit Tests
-      run: make test
-
-    - name: Make Unit Test Reports
       run: make test-reports
 
-    - name: Archive code coverage results
+    - name: Archive Unit Test Reports
       uses: actions/upload-artifact@v1
       with:
         name: code-coverage-report

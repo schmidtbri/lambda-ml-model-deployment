@@ -49,7 +49,7 @@ test: clean-pyc ## Run unit test suite.
 
 test-reports: clean-pyc ## Run unit test suite with reporting
 	mkdir -p reports
-	python -m coverage run --source model_lambda -m pytest --verbose --color=yes --junitxml=./reports/unit_tests.xml $(TEST_PATH)
+	python -m coverage run --source model_lambda -m pytest --verbose --color=yes --html=./reports/unit_tests/report.html --junitxml=./reports/unit_tests/report.xml $(TEST_PATH)
 	coverage html -d ./reports/coverage
 	rm -rf .coverage
 
