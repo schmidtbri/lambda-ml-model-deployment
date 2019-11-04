@@ -25,5 +25,5 @@ setup(
     install_requires=["marshmallow>3",
                       "apispec[yaml]>3",
                       "iris-model@git+https://github.com/schmidtbri/ml-model-abc-improvements#egg=iris_model@master"],
-    tests_require=['pytest', 'pytest-html', 'pylama', 'coverage', 'bandit', 'safety']
+    tests_require=['pytest', 'pytest-html', 'pylama', 'coverage', 'coverage-badge', 'bandit', 'safety']
 )

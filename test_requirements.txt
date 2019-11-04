@@ -16,6 +16,8 @@ pytest-html==2.0.0
 pytest-metadata==1.8.0
 # this package is used to calculate unit test coverage
 coverage==4.5.4
+# this package is used to generate a code coverage badge
+ coverage-badge==1.0.1
 # these packages are used to do code analysis
 mccabe==0.6.1
 pycodestyle==2.5.0
