@@ -50,7 +50,7 @@ test: clean-pyc ## Run unit test suite.
 test-reports: clean-pyc ## Run unit test suite with reporting
 	mkdir -p reports
 	python -m coverage run --source model_lambda -m pytest --verbose --color=yes --junitxml=./reports/unit_tests.xml $(TEST_PATH)
-	coverage xml -o ./reports/coverage.xml
+	coverage html -d ./reports/coverage
 	rm -rf .coverage
 
 clean-test:	## Remove test artifacts
