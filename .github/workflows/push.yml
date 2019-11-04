@@ -26,11 +26,6 @@ jobs:
     - name: Install Test Dependencies
       run : make test-dependencies
 
-  check-code:
-
-    needs: setup-environment
-
-    steps:
     - name: Check Codestyle
       run: make check-codestyle
 
@@ -39,3 +34,9 @@ jobs:
 
     - name: Check Security Issues
       run: make check-security
+
+    - name: Check Dependency Security
+      run: make check-dependencies
+
+    - name: Run Unit Tests
+      run: make test
