@@ -1,6 +1,9 @@
 name: Build
 
-on: [push]
+on:
+  push:
+    branches:
+    - master
 
 jobs:
 
@@ -40,15 +43,6 @@ jobs:
 
     - name: Run Unit Tests
       run: make test-reports
-
-    - name: Set Code Coverage Badge
-      uses: peaceiris/actions-gh-pages@v2.5.0
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./coverage
-      with:
-        keepFiles: true
 
     - name: Archive Unit Test Report
       uses: actions/upload-artifact@v1

@@ -114,6 +114,28 @@ class LambdaFunctionTests(unittest.TestCase):
         self.assertTrue(result["headers"] == {'Content-Type': 'application/json'})
         self.assertTrue(json.loads(result["body"]) == {"species": "setosa"})
 
+    def test6(self):
+        """test for handling unknown http api resource in the lambda_function.lambda_handler function"""
+        # arrange
+        from model_lambda.lambda_function import lambda_handler
+
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data", "api_gateway_unknown_event.json")
+        with open(path) as json_file:
+            event = json.load(json_file)
+
+        # act
+        exception_thrown = False
+        exception_message = None
+        try:
+            result = lambda_handler(event=event, context=None)
+        except Exception as e:
+            exception_thrown = True
+            exception_message = str(e)
+
+        # assert
+        self.assertTrue(exception_thrown)
+        self.assertTrue((exception_message == "This lambda cannot handle this resource."))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -47,13 +47,14 @@ clean-venv: ## remove all packages from virtual environment
 test: clean-pyc ## Run unit test suite.
 	pytest --verbose --color=yes $(TEST_PATH)
 
-test-reports: clean-pyc ## Run unit test suite with reporting
+test-reports: clean-pyc clean-test ## Run unit test suite with reporting
 	mkdir -p reports
+	mkdir ./reports/unit_tests
+	mkdir ./reports/coverage
+	mkdir ./reports/badge
 	python -m coverage run --source model_lambda -m pytest --verbose --color=yes --html=./reports/unit_tests/report.html --junitxml=./reports/unit_tests/report.xml $(TEST_PATH)
 	coverage html -d ./reports/coverage
-	rm -rf ./coverage/coverage.svg
-	coverage-badge -o ./coverage/coverage.svg
-	rm -rf .coverage
+	coverage-badge -o ./reports/badge/coverage.svg
 
 clean-test:	## Remove test artifacts
 	rm -rf .pytest_cache

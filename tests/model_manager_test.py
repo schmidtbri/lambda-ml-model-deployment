@@ -1,6 +1,25 @@
 import unittest
 from traceback import print_tb
+from ml_model_abc import MLModel
 from model_lambda.model_manager import ModelManager
+
+
+# creating an MLModel class to test with
+class MLModelMock(MLModel):
+    # accessing the package metadata
+    display_name = "display name"
+    qualified_name = "qualified_name"
+    description = "description"
+    major_version = 1
+    minor_version = 1
+    input_schema = None
+    output_schema = None
+
+    def __init__(self):
+        pass
+
+    def predict(self, data):
+        pass
 
 
 # creating a mockup class to test with
@@ -17,16 +36,16 @@ class ModelManagerTests(unittest.TestCase):
         model_manager = ModelManager()
         # loading the MLModel objects from configuration
         model_manager.load_models(configuration=[{
-            "module_name": "iris_model.iris_predict",
-            "class_name": "IrisModel"
+            "module_name": "tests.model_manager_test",
+            "class_name": "MLModelMock"
         }])
 
         # act
         exception_raised = False
         model_object = None
-        # accessing the IrisModel model object
+        # accessing the MLModelMock model object
         try:
-            model_object = model_manager.get_model(qualified_name="iris_model")
+            model_object = model_manager.get_model(qualified_name="qualified_name")
         except Exception as e:
             exception_raised = True
             print_tb(e)
@@ -36,8 +55,8 @@ class ModelManagerTests(unittest.TestCase):
         self.assertTrue(model_object is not None)
 
     def test2(self):
-        """ testing that the ModelManager will return the same instance of an MLModel class from several different
-        instances of ModelManager """
+        """testing that the ModelManager will return the same instance of an MLModel class from several different
+        instances of ModelManager"""
         # arrange
         # instantiating the model manager class
         first_model_manager = ModelManager()
@@ -45,8 +64,8 @@ class ModelManagerTests(unittest.TestCase):
         # loading the MLModel objects from configuration
         first_model_manager.load_models(configuration=[
             {
-                "module_name": "iris_model.iris_predict",
-                "class_name": "IrisModel"
+                "module_name": "tests.model_manager_test",
+                "class_name": "MLModelMock"
             }
         ])
 

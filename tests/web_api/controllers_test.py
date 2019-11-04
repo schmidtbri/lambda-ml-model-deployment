@@ -1,9 +1,29 @@
 import unittest
 import json
+from traceback import print_tb
 
+from ml_model_abc import MLModel
 from model_lambda.model_manager import ModelManager
 from model_lambda.web_api.schemas import ModelCollectionSchema, ModelMetadataSchema, ErrorSchema
 import model_lambda.web_api.controllers as controllers
+
+
+# creating an MLModel class to test with
+class MLModelMock(MLModel):
+    # accessing the package metadata
+    display_name = "display name"
+    qualified_name = "qualified_name"
+    description = "description"
+    major_version = 1
+    minor_version = 1
+    input_schema = None
+    output_schema = None
+
+    def __init__(self):
+        pass
+
+    def predict(self, data):
+        raise Exception("some exception")
 
 
 class ControllersTests(unittest.TestCase):
@@ -12,6 +32,7 @@ class ControllersTests(unittest.TestCase):
         """testing get_models() controller"""
         # arrange
         model_manager = ModelManager()
+        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -31,6 +52,7 @@ class ControllersTests(unittest.TestCase):
         """testing get_metadata() controller with existing model"""
         # arrange
         model_manager = ModelManager()
+        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -51,6 +73,7 @@ class ControllersTests(unittest.TestCase):
         """testing get_metadata() controller with non-existing model"""
         # arrange
         model_manager = ModelManager()
+        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -71,6 +94,7 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller with bad data"""
         # arrange
         model_manager = ModelManager()
+        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -91,6 +115,7 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller with non-existing model"""
         # arrange
         model_manager = ModelManager()
+        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -111,6 +136,7 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller with good data"""
         # arrange
         model_manager = ModelManager()
+        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -130,6 +156,7 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller with data that does not meet the model schema"""
         # arrange
         model_manager = ModelManager()
+        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -145,6 +172,32 @@ class ControllersTests(unittest.TestCase):
         self.assertTrue(result.status == 400)
         self.assertTrue(result.mimetype == "application/json")
         self.assertTrue(json.loads(result.data) == {"message": "Failed to validate input data: Key 'petal_length' error:\n'asdf' should be instance of 'float'", "type": "SCHEMA_ERROR"})
+
+    def test8(self):
+        """testing predict() controller will handle exceptions in the model class correctly"""
+        # arrange
+        model_manager = ModelManager()
+        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
+        model_manager.load_models(configuration=[{
+            "module_name": "tests.web_api.controllers_test",
+            "class_name": "MLModelMock"
+        }])
+
+        # act
+        exception_raised = False
+        try:
+            result = controllers.predict(qualified_name="qualified_name", request_body='{}')
+            schema = ErrorSchema()
+            data = schema.loads(json_data=result.data)
+        except Exception as e:
+            exception_raised = True
+
+        # assert
+        self.assertFalse(exception_raised)
+        self.assertTrue(type(result) == controllers.Response)
+        self.assertTrue(result.status == 500)
+        self.assertTrue(result.mimetype == "application/json")
+        self.assertTrue(json.loads(result.data) == {"message": "Could not make a prediction.", "type": "ERROR"})
 
 
 if __name__ == '__main__':
