@@ -41,8 +41,14 @@ jobs:
     - name: Run Unit Tests
       run: make test-reports
 
-    - name: Archive Unit Test Reports
+    - name: Archive Unit Test Report
       uses: actions/upload-artifact@v1
       with:
-        name: code-coverage-report
-        path: reports/coverage
+        name: unit-test-report
+        path: reports/unit_tests
+
+    - name: Archive Code Coverage Report
+        uses: actions/upload-artifact@v1
+        with:
+          name: code-coverage-report
+          path: reports/coverage
