@@ -1,6 +1,6 @@
 # AWS Lambda ML Model Deployment
 
-![](https://github.com/schmidtbri/lambda-ml-model-deployment/workflows/Push/badge.svg)
+![](https://github.com/schmidtbri/lambda-ml-model-deployment/workflows/Build/badge.svg)
 
 
 Deploying an ML model in AWS Lambda.
