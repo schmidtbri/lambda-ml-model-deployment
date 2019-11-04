@@ -51,6 +51,7 @@ test-reports: clean-pyc ## Run unit test suite with reporting
 	mkdir -p reports
 	python -m coverage run --source model_lambda -m pytest --verbose --color=yes --html=./reports/unit_tests/report.html --junitxml=./reports/unit_tests/report.xml $(TEST_PATH)
 	coverage html -d ./reports/coverage
+	rm -rf ./coverage/coverage.svg
 	coverage-badge -o ./coverage/coverage.svg
 	rm -rf .coverage
 
