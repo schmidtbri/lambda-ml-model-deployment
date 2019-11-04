@@ -1,4 +1,8 @@
 # AWS Lambda ML Model Deployment
+
+https://github.com/schmidtbri/lambda-ml-model-deployment/workflows/Push/badge.svg
+
+
 Deploying an ML model in AWS Lambda.
 
 This code is used in this [blog post]().
