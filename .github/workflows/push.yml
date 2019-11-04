@@ -48,7 +48,7 @@ jobs:
         path: reports/unit_tests
 
     - name: Archive Code Coverage Report
-        uses: actions/upload-artifact@v1
-        with:
-          name: code-coverage-report
-          path: reports/coverage
+      uses: actions/upload-artifact@v1
+      with:
+        name: code-coverage-report
+        path: reports/coverage
