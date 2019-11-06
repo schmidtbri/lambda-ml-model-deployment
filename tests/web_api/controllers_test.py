@@ -32,7 +32,6 @@ class ControllersTests(unittest.TestCase):
         """testing get_models() controller"""
         # arrange
         model_manager = ModelManager()
-        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -52,7 +51,6 @@ class ControllersTests(unittest.TestCase):
         """testing get_metadata() controller with existing model"""
         # arrange
         model_manager = ModelManager()
-        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -73,7 +71,6 @@ class ControllersTests(unittest.TestCase):
         """testing get_metadata() controller with non-existing model"""
         # arrange
         model_manager = ModelManager()
-        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -94,7 +91,6 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller with bad data"""
         # arrange
         model_manager = ModelManager()
-        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -115,7 +111,6 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller with non-existing model"""
         # arrange
         model_manager = ModelManager()
-        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -136,7 +131,6 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller with good data"""
         # arrange
         model_manager = ModelManager()
-        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -156,7 +150,6 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller with data that does not meet the model schema"""
         # arrange
         model_manager = ModelManager()
-        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "iris_model.iris_predict",
             "class_name": "IrisModel"
@@ -177,7 +170,6 @@ class ControllersTests(unittest.TestCase):
         """testing predict() controller will handle exceptions in the model class correctly"""
         # arrange
         model_manager = ModelManager()
-        ModelManager._models = []  # resetting the _models class variable to avoid problems between tests
         model_manager.load_models(configuration=[{
             "module_name": "tests.web_api.controllers_test",
             "class_name": "MLModelMock"

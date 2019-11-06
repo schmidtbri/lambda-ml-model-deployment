@@ -7,6 +7,13 @@ Deploying an ML model in AWS Lambda.
 
 This code is used in this [blog post]().
 
+## Requirements
+This project requires the [serverless framework](https://serverless.com/framework/docs/getting-started/), which itself requires the [node.js framework](https://nodejs.org/en/download/package-manager/).
+
+In order to create the lambda deployment package, the [serverless-python-requirements](https://github.com/UnitedIncome/serverless-python-requirements) extension for serverless must be installed.
+
+In order to compile the packages in the lambda deployment package [docker](https://docs.docker.com/v17.09/engine/installation/) needs to be installed.
+
 ## Installation 
 The makefile included with this project contains targets that help to automate several tasks.
 
@@ -40,3 +47,4 @@ make test-dependencies
 # run the test suite
 make test
 ```
+

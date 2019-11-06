@@ -32,7 +32,6 @@ class LambdaFunctionTests(unittest.TestCase):
     def test2(self):
         """test model manager is loaded with configuration when the lambda_function module is initiated"""
         # arrange, act
-        from model_lambda.lambda_function import lambda_handler
         from model_lambda.model_manager import ModelManager
         model_manager = ModelManager()
 

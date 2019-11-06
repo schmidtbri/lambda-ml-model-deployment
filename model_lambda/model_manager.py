@@ -12,12 +12,13 @@ class ModelManager(object):
     @classmethod
     def load_models(cls, configuration):
         """Load models from configuration."""
+        cls._models = []  # resetting the model list to empty
         for c in configuration:
             model_module = importlib.import_module(c["module_name"])
             model_class = getattr(model_module, c["class_name"])
             model_object = model_class()
 
-            if isinstance(model_object, MLModel) is False:
+            if not isinstance(model_object, MLModel):
                 raise ValueError("The ModelManager can only hold references to objects of type MLModel.")
 
             # saving the model reference to the models list

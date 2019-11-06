@@ -20,15 +20,6 @@ clean-build:  ## clean build artifacts
 	rm -rf dist
 	rm -rf model_lambda.egg-info
 
-deployment-package:  ## makes a deployment package with all dependencies
-	# installing all dependencies to the vendors directory
-	mkdir vendors
-	pip install --target vendors -r requirements.txt
-	python setup.py sdist --create_deployment_package
-	rm -rf vendors
-	rm -rf build
-	rm -rf model_task_queue.egg-info
-
 venv: ## create virtual environment
 	python3 -m venv venv
 

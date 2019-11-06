@@ -1,15 +1,48 @@
-service: model-lambda
-
-frameworkVersion: ">=1.2.0 <2.0.0"
+service: model-service
 
 provider:
   name: aws
-  runtime: python2.73.7
+  runtime: python3.7
+
+stage: dev
+region: us-east-2
+
+package:
+  exclude:
+    - "**/**"
+  include:
+    - "model_lambda/**"
 
 functions:
-  currentTime:
-    handler: lambda_function.lambda_handler
+  model-lambda:
+    handler: model_lambda.lambda_function.lambda_handler
     events:
       - http:
-          path: ping
+          path: api/models
           method: get
+      - http:
+          path: api/models/{qualified_name}/metadata
+          method: get
+          request:
+            parameters:
+              paths:
+                qualified_name: true
+      - http:
+          path: api/models/{qualified_name}/predict
+          method: post
+          request:
+            parameters:
+              paths:
+                qualified_name: true
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    slim: true
+    strip: false
+    noDeploy:
+      - apispec
+      - PyYAML
