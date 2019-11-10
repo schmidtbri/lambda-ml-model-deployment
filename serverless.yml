@@ -5,7 +5,7 @@ provider:
   runtime: python3.7
 
 stage: dev
-region: us-east-2
+region: us-east-1
 
 package:
   exclude:
@@ -42,7 +42,6 @@ custom:
   pythonRequirements:
     dockerizePip: true
     slim: true
-    strip: false
     noDeploy:
       - apispec
       - PyYAML
