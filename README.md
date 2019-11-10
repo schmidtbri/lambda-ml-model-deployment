@@ -5,7 +5,7 @@
 
 Deploying an ML model in AWS Lambda.
 
-This code is used in this [blog post]().
+This code is used in this [blog post](https://medium.com/@brianschmidt_78145/an-aws-lambda-ml-model-deployment-4ec83d6179d4).
 
 ## Requirements
 This project requires the [serverless framework](https://serverless.com/framework/docs/getting-started/), which itself requires the [node.js framework](https://nodejs.org/en/download/package-manager/).
