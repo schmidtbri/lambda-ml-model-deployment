@@ -1,5 +1,5 @@
 Title: An AWS Lambda ML Model Deployment
-Date: 2019-09-20 09:24
+Date: 2019-11-10 09:25
 Category: Blog
 Slug: lambda-ml-model-deployment
 Authors: Brian Schmidt
