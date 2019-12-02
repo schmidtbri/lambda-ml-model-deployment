@@ -6,15 +6,15 @@ Authors: Brian Schmidt
 Summary: In the last few years, a new cloud computing paradigm has emerged: serverless computing. This new paradigm flips the normal way of provisioning resources in a cloud environment on its head. Whereas a normal application is deployed onto pre-provisioned servers that are running before they are needed, a serverless application's codebase is deployed and the servers are assigned to run the application as demand for the application rises.
 
 This blog post builds on the ideas started in
-[three](https://towardsdatascience.com/a-simple-ml-model-base-class-ab40e2febf13)
-[previous](https://towardsdatascience.com/improving-the-mlmodel-base-class-eded137629bd)
-[blog posts](https://towardsdatascience.com/using-the-ml-model-base-class-7b984edf47c5).
+[three]({filename}/articles/a-simple-ml-model-base-class/post.md)
+[previous]({filename}/articles/improving-the-mlmodel-base-class/post.md)
+[blog posts]({filename}/articles/using-ml-model-abc/post.md).
 
 I also showed how to deploy the same ML model used in this blog post as
 a batch job in this [blog
-post](https://towardsdatascience.com/a-batch-job-ml-model-deployment-da41b8ea5a99),
+post]({filename}/articles/etl-job-ml-model-deployment/post.md),
 and in a task queue in this [blog
-post](https://towardsdatascience.com/a-task-queue-ml-model-deployment-552d2ceb38a5).
+post]({filename}/articles/task-queue-ml-model-deployment/post.md).
 
 The code in this blog post can be found in this [github
 repo](https://github.com/schmidtbri/lambda-ml-model-deployment).
@@ -149,7 +149,7 @@ We'll be adding code to the handler function later.
 
 In order to manage a collection MLModel objects in the lambda, we'll
 reuse a piece of code that we've used before in a [previous blog
-post](https://towardsdatascience.com/using-the-ml-model-base-class-7b984edf47c5).
+post]({filename}/articles/using-ml-model-abc/post.md).
 In the previous post, I wrote a class called "ModelManager" that is
 responsible for instantiating MLModel classes from configuration,
 returning information about the model objects being managed, and return
@@ -164,7 +164,7 @@ class can be found
 [here](https://github.com/schmidtbri/lambda-ml-model-deployment/blob/master/model_lambda/model_manager.py).
 For a full explanation of the code in the class, please read the
 [original blog
-post](https://towardsdatascience.com/using-the-ml-model-base-class-7b984edf47c5).
+post]({filename}/articles/using-ml-model-abc/post.md).
 
 In order to use the ModelManager class within the model lambda we have
 to first instantiate it, then call the load\_model() method to load
@@ -199,7 +199,7 @@ service that can serve predictions from the models that are hosted by
 the lambda. To do this, we'll add an API Gateway as an event source to
 the lambda function later. To be able to handle the HTTP requests sent
 by the API Gateway, we'll copy the code from a [previous blog
-post](https://towardsdatascience.com/using-the-ml-model-base-class-7b984edf47c5)
+post]({filename}/articles/using-ml-model-abc/post.md)
 used to build a Flask web service. The code that defines the REST
 endpoints is isolated inside of [a
 subpackage](https://github.com/schmidtbri/lambda-ml-model-deployment/tree/master/model_lambda/web_api)
@@ -216,7 +216,7 @@ handled by a web application framework, we'll avoid using Flask for
 building the application. However, we still have to define controller
 functions that receive requests and return responses to a client. To do
 this we'll reuse the controllers from the [previous blog
-post](https://towardsdatascience.com/using-the-ml-model-base-class-7b984edf47c5)
+post]({filename}/articles/using-ml-model-abc/post.md)
 and rewrite them a bit to remove the Flask dependency. The new
 controller functions can be found in [this
 module](https://github.com/schmidtbri/lambda-ml-model-deployment/blob/master/model_lambda/web_api/controllers.py).
